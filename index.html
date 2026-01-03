@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>班级管理系统</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header">
+<h1>班级管理系统</h1>
+<div class="role-switch">
+<label for="roleSelect">角色</label>
+<select id="roleSelect">
+<option value="student">用户端</option>
+<option value="teacher">老师端</option>
+<option value="admin">管理端</option>
+</select>
+<span id="apiStatus" class="status-badge status-offline">离线</span>
+<label for="themeSelect">主题</label>
+<select id="themeSelect">
+<option value="dark">深色</option>
+<option value="light">浅色</option>
+</select>
+<input id="loginUser" placeholder="用户名">
+<input id="loginPass" placeholder="密码" type="password">
+<button id="btnLogin">登录</button>
+<button id="btnLogout" style="display:none">退出</button>
+<span id="userInfo" class="status-badge" style="display:none"></span>
+</div>
+</header>
+<section id="landingView" class="landing">
+<div class="hero">
+<div class="hero-title">请选择你的身份</div>
+<div class="cards">
+<div class="card3d" id="btnAdminCard"><div class="card-inner"><div class="card-title">我是管理员</div><div class="card-sub">管理班级与学生</div><button class="card-action">登录</button></div></div>
+<div class="card3d" id="btnTeacherCard"><div class="card-inner"><div class="card-title">我是老师</div><div class="card-sub">发布作业与通知</div><button class="card-action">登录/注册</button></div></div>
+<div class="card3d" id="btnStudentCard"><div class="card-inner"><div class="card-title">我是学生</div><div class="card-sub">查看课表与打卡</div><button class="card-action">登录/注册</button></div></div>
+</div>
+</div>
+</section>
+<div id="authModal" class="modal hidden">
+<div class="modal-card">
+<div class="modal-header">
+<div class="avatar"></div>
+<div id="authRoleLabel">登录</div>
+</div>
+<div class="tabs">
+<button id="tabLogin" class="tab active">登录</button>
+<button id="tabRegister" class="tab">注册</button>
+</div>
+<div class="modal-body">
+<div class="form" id="loginForm">
+<input id="authLoginUsername" placeholder="用户名">
+<input id="authLoginPassword" placeholder="密码" type="password">
+<button id="btnAuthLogin">进入</button>
+</div>
+<div class="form hidden" id="registerForm">
+<input id="authRegisterUsername" placeholder="用户名">
+<input id="authRegisterPassword" placeholder="密码" type="password">
+<input id="authRegisterName" placeholder="姓名">
+<select id="authRegisterClass"></select>
+<button id="btnAuthRegister">注册并进入</button>
+</div>
+</div>
+<button id="btnAuthClose" class="modal-close">关闭</button>
+</div>
+</div>
+<main class="container">
+<section id="studentView" class="view">
+<div class="panel">
+<div class="panel-header">
+<h2>学生课表</h2>
+<div class="toolbar">
+<select id="studentSelect"></select>
+<button id="btnSyncTimetable">同步课表</button>
+</div>
+<div class="subtext">从班级课表同步到本地</div>
+</div>
+<div id="timetableList" class="list"></div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>通知中心</h2>
+</div>
+<div id="studentNotifications" class="list"></div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>作业列表</h2>
+</div>
+<div id="studentHomework" class="list"></div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>定位打卡</h2>
+<div class="toolbar">
+<button id="btnCheckIn">打卡</button>
+<span id="checkinStatus"></span>
+</div>
+</div>
+<div id="attendanceSummary" class="list"></div>
+</div>
+</section>
+<section id="teacherView" class="view hidden">
+<div class="panel">
+<div class="panel-header">
+<h2>发布作业</h2>
+</div>
+<div class="form">
+<select id="teacherClassSelect"></select>
+<input id="homeworkTitle" placeholder="标题">
+<textarea id="homeworkContent" placeholder="内容"></textarea>
+<button id="btnSendHomework">发布</button>
+</div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>发布班级通知</h2>
+</div>
+<div class="form">
+<select id="teacherClassSelectNotice"></select>
+<input id="classNoticeTitle" placeholder="标题">
+<textarea id="classNoticeContent" placeholder="内容"></textarea>
+<button id="btnSendClassNotice">发布</button>
+</div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>考勤概览</h2>
+<div class="toolbar">
+<input type="date" id="startDate">
+<input type="date" id="endDate">
+<button id="btnApplyRange">筛选</button>
+<button id="btnExportCSV">导出CSV</button>
+</div>
+</div>
+<div id="teacherAttendanceDashboard" class="list"></div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>作业提交情况</h2>
+</div>
+<div id="teacherHomeworkDashboard" class="list"></div>
+</div>
+</section>
+<section id="adminView" class="view hidden">
+<div class="panel">
+<div class="panel-header">
+<h2>班级管理</h2>
+<div class="toolbar">
+<input id="newClassName" placeholder="新班级名称">
+<button id="btnAddClass">新增班级</button>
+</div>
+</div>
+<div id="adminClasses" class="list"></div>
+</div>
+<div class="panel">
+<div class="panel-header">
+<h2>学生管理</h2>
+<div class="toolbar">
+<input id="newStudentName" placeholder="学生姓名">
+<select id="newStudentClass"></select>
+<button id="btnAddStudent">新增学生</button>
+</div>
+</div>
+<div id="adminStudents" class="list"></div>
+</div>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
+

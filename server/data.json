@@ -1,0 +1,124 @@
+{
+  "classes": [
+    {
+      "id": "c1",
+      "name": "高一(1)班"
+    },
+    {
+      "id": "c2",
+      "name": "高一(2)班"
+    },
+    {
+      "id": "c1767449193495",
+      "name": "24卓越班"
+    },
+    {
+      "id": "c1767449598040",
+      "name": "test"
+    }
+  ],
+  "students": [
+    {
+      "id": "s1",
+      "name": "张三",
+      "classId": "c1"
+    },
+    {
+      "id": "s2",
+      "name": "李四",
+      "classId": "c1"
+    },
+    {
+      "id": "s3",
+      "name": "王五",
+      "classId": "c2"
+    },
+    {
+      "id": "s1767449210170",
+      "name": "陈俊宇",
+      "classId": "c1767449193495"
+    },
+    {
+      "id": "s1767449274929",
+      "name": "艾景杨",
+      "classId": "c1767449193495"
+    }
+  ],
+  "timetable": {
+    "c1": [
+      {
+        "id": "t1",
+        "day": "星期一",
+        "time": "08:00-08:45",
+        "course": "语文",
+        "room": "A201"
+      },
+      {
+        "id": "t2",
+        "day": "星期一",
+        "time": "09:00-09:45",
+        "course": "数学",
+        "room": "A203"
+      },
+      {
+        "id": "t3",
+        "day": "星期二",
+        "time": "10:00-10:45",
+        "course": "英语",
+        "room": "A105"
+      }
+    ],
+    "c2": [
+      {
+        "id": "t4",
+        "day": "星期一",
+        "time": "08:00-08:45",
+        "course": "物理",
+        "room": "B301"
+      },
+      {
+        "id": "t5",
+        "day": "星期二",
+        "time": "09:00-09:45",
+        "course": "化学",
+        "room": "B303"
+      },
+      {
+        "id": "t6",
+        "day": "星期三",
+        "time": "10:00-10:45",
+        "course": "生物",
+        "room": "B105"
+      }
+    ]
+  },
+  "notifications": [],
+  "attendance": [],
+  "homework": [],
+  "homeworkSubmissions": [],
+  "notificationReads": [],
+  "users": [
+    {
+      "id": "u_admin",
+      "username": "admin",
+      "role": "admin",
+      "passwordHash": "63cac3e7f6b2a3df28a6ef145d5df2f782098ce5997e15d84cec5365997cb9fe",
+      "salt": "709f9c08db315e8d"
+    },
+    {
+      "id": "u_teacher",
+      "username": "teacher",
+      "role": "teacher",
+      "passwordHash": "",
+      "salt": ""
+    },
+    {
+      "id": "u_s1",
+      "username": "student1",
+      "role": "student",
+      "passwordHash": "",
+      "salt": "",
+      "studentId": "s1"
+    }
+  ]
+}
